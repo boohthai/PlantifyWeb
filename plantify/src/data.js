@@ -1,6 +1,6 @@
-import tree1 from '../../youtube-react-shop-ui/src/assets/tree1.png'
-import tree2 from '../../youtube-react-shop-ui/src/assets/tree2.png'
-import tree3 from '../../youtube-react-shop-ui/src/assets/tree3.png'
+import tree1 from '../../plantify/src/assets/tree1.png'
+import tree2 from '../../plantify/src/assets/tree2.png'
+import tree3 from '../../plantify/src/assets/tree3.png'
 export const sliderItems = [
     {
       id: 1,
