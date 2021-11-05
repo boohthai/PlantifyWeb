@@ -1,13 +1,27 @@
-export const addItemToCart = (cart) => {
+export const addItemToCart = (item) => {
   return {
     type: "ADD_ITEM",
-    payload: cart,
+    payload: item,
   };
 };
 
-export const removerItemFromCart = (cart) => {
+export const removeItemFromCart = (item) => {
   return {
     type: "REMOVE_ITEM",
-    payload: cart,
+    payload: item,
+  };
+};
+
+export const updateTotalCost = (amount) => {
+  return {
+    type: "UPDATE_COST",
+    payload: amount,
+  };
+};
+
+export const updateItemQuantity = (item, amount) => {
+  return {
+    type: "UPDATE_QUANTITY",
+    payload: { item: item, amount: amount },
   };
 };

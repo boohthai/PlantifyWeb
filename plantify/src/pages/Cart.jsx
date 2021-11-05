@@ -1,12 +1,13 @@
-import { Add, Remove } from "@material-ui/icons";
+import { Add, Remove, Delete } from "@material-ui/icons";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeItemFromCart, updateItemQuantity } from "../actions/cart";
 
 const Container = styled.div``;
 
@@ -160,7 +161,20 @@ const Button = styled.button`
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.list);
+  const cost = useSelector((state) => state.cart.cost);
+  const totalItems = useSelector((state) => state.cart.total);
+  const [totalCost, setTotalCost] = useState(cost);
   console.log("Cart: ", cartItems);
+  const dispatch = useDispatch();
+
+  const handleRemoveItem = (item) => {
+    console.log("REMOVING ", item);
+    dispatch(removeItemFromCart(item));
+  };
+
+  useEffect(() => {
+    setTotalCost(cost);
+  }, [cost]);
 
   return (
     <Container>
@@ -173,7 +187,7 @@ const Cart = () => {
             <TopButton>CONTINUE SHOPPING</TopButton>
           </Link>
           <TopTexts>
-            <TopText>Shopping Bag (2)</TopText>
+            <TopText>Shopping Bag ({totalItems})</TopText>
             <TopText>Your Wishlist (0)</TopText>
           </TopTexts>
           <TopButton type="filled">CHECKOUT NOW</TopButton>
@@ -199,47 +213,36 @@ const Cart = () => {
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <Remove />
+                    <Remove
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        if (item.quantity > 1) {
+                          dispatch(updateItemQuantity(item, -1));
+                          setTotalCost(cost);
+                        }
+                      }}
+                    />
                     <ProductAmount>{item.quantity}</ProductAmount>
-                    <Add />
+                    <Add
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        dispatch(updateItemQuantity(item, 1));
+                        setTotalCost(cost);
+                      }}
+                    />
+                    <Delete style={{ paddingLeft: "35px", cursor: "pointer" }} onClick={() => handleRemoveItem(item)} />
                   </ProductAmountContainer>
                   <ProductPrice> {item.price} VND</ProductPrice>
                 </PriceDetail>
               </Product>
             ))}
-            {/* <Product>
-              <ProductDetail>
-                <Image src="https://bloomscape.com/wp-content/uploads/2020/08/bloomscape_peperomia-watermelon_detail.jpg?ver=279042" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> PEPEROMIA WATERMELON
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 93813718293
-                  </ProductId>
-
-                  <ProductSize>
-                    <b>Size:</b> L
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Remove />
-                  <ProductAmount>2</ProductAmount>
-                  <Add />
-                </ProductAmountContainer>
-                <ProductPrice> 40000 VND</ProductPrice>
-              </PriceDetail>
-            </Product> */}
-
             <Hr />
           </Info>
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>80000 VND</SummaryItemPrice>
+              <SummaryItemPrice>{totalCost} VND</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
@@ -251,7 +254,7 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice> 80000 VND </SummaryItemPrice>
+              <SummaryItemPrice> {totalCost - 24100} VND </SummaryItemPrice>
             </SummaryItem>
             <Button>CHECKOUT NOW</Button>
           </Summary>

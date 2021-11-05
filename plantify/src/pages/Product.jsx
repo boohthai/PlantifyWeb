@@ -8,6 +8,9 @@ import { mobile } from "../responsive";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { popularProducts } from "../data";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "../actions/cart";
 
 const Container = styled.div``;
 
@@ -119,9 +122,17 @@ const Button = styled.button`
 `;
 
 const Product = () => {
+  const [quantity, setQuantity] = useState(1);
+
+  const dispatch = useDispatch();
+
   const handleAddToCart = () => {
-    console.log("ADDING TO CART");
-    return;
+    const newItem = {
+      ...item,
+      quantity: quantity,
+      size: "S",
+    };
+    dispatch(addItemToCart(newItem));
   };
 
   let { id } = useParams();
@@ -147,15 +158,24 @@ const Product = () => {
                 <FilterSizeOption>S</FilterSizeOption>
                 <FilterSizeOption>M</FilterSizeOption>
                 <FilterSizeOption>L</FilterSizeOption>
-                <FilterSizeOption>XL</FilterSizeOption>
               </FilterSize>
             </Filter>
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <Remove />
-              <Amount>1</Amount>
-              <Add />
+              <Remove
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  if (quantity > 1) setQuantity(quantity - 1);
+                }}
+              />
+              <Amount>{quantity}</Amount>
+              <Add
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setQuantity(quantity + 1);
+                }}
+              />
             </AmountContainer>
             <Button onClick={handleAddToCart}>ADD TO CART</Button>
           </AddContainer>

@@ -1,25 +1,26 @@
 const initialState = {
   total: 3,
+  cost: 376000,
   list: [
     {
       id: 1,
-      img: "https://www.costafarms.com/images/SlideShow/Croton-Popular-Houseplants-Cota-Farms.jpg",
-      title: "PEPEROMIA WATERMELON",
-      size: "L",
-      price: 40000,
-      quantity: 2,
+      img: "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1631219993-il_794xN.3140617889_tliu.jpg?crop=1xw:1.00xh;center,top&resize=768:*",
+      title: "Paddle Plant",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, dolor in finibus malesuada, lectus ipsum porta nunc, at iaculis arcu nisi sed mauris. Nulla fermentum vestibulum ex, eget tristique tortor pretium ut. Curabitur elit justo, consequat id condimentum ac, volutpat ornare.",
+        "The paddle plant is a bold succulent that has big, round leaves with pink tips. These plants favor bright light so you can have it sit right on a sunny windowsill to soak in all the rays. These also like to be on the drier side, so don’t worry if you forget to water from time to time — they can take it!",
+      price: 95000,
+      size: "L",
+      quantity: 2,
     },
     {
-      id: 2,
-      img: "https://www.costafarms.com/images/SlideShow/Dracaena-Popular-Houseplants-Costa-Farms.jpg",
-      title: "PPEROMIA APPLE",
-      size: "S",
-      price: 30000,
-      quantity: 1,
+      id: 3,
+      img: "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1631220346-il_794xN.2390259956_tknd.jpg?crop=1xw:1.00xh;center,top&resize=768:*",
+      title: "String of Pearls",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, dolor in finibus malesuada, lectus ipsum porta nunc, at iaculis arcu nisi sed mauris. Nulla fermentum vestibulum ex, eget tristique tortor pretium ut. Curabitur elit justo, consequat id condimentum ac, volutpat ornare.",
+        "Add this little guy to a shelf and watch it trail down. Make sure that you place it in bright, indirect sunlight and water every one to two weeks.",
+      price: 186000,
+      size: "S",
+      quantity: 1,
     },
   ],
 };
@@ -27,11 +28,52 @@ const initialState = {
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_ITEM": {
-      return state;
+      const newList = [...state.list];
+      let { id } = action.payload;
+      const item = newList.filter((item) => item.id === id);
+      if (item.length > 0) {
+        newList.forEach((i) => {
+          if (i.id === id) {
+            i.quantity += action.payload.quantity;
+          }
+        });
+      } else {
+        newList.push(action.payload);
+      }
+      state.total += action.payload.quantity;
+      return {
+        ...state,
+        list: newList,
+      };
     }
 
     case "REMOVE_ITEM": {
-      return state;
+      var newList = [...state.list];
+      let { id } = action.payload;
+      newList = newList.filter((item) => item.id !== id);
+      state.total -= action.payload.quantity;
+      return {
+        ...state,
+        list: newList,
+      };
+    }
+
+    case "UPDATE_QUANTITY": {
+      const { item, amount } = action.payload;
+      var newList = [...state.list];
+      var newCost;
+      newList.forEach((i) => {
+        if (i.id === item.id) {
+          i.quantity += amount;
+          newCost = state.cost + amount * item.price;
+        }
+      });
+      state.total += amount;
+      return {
+        ...state,
+        list: newList,
+        cost: newCost,
+      };
     }
 
     default:

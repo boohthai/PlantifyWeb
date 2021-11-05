@@ -2,6 +2,8 @@ import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } from "@m
 import styled from "styled-components";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "../actions/cart";
 
 const Info = styled.div`
   opacity: 0;
@@ -65,12 +67,23 @@ const Icon = styled.div`
 `;
 
 const Product = ({ item }) => {
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    const newItem = {
+      ...item,
+      quantity: 1,
+      size: "S",
+    };
+    dispatch(addItemToCart(newItem));
+  };
+
   return (
     <Container>
       <Circle />
       <Image src={item.img} />
       <Info>
-        <Icon>
+        <Icon onClick={handleClick}>
           <ShoppingCartOutlined />
         </Icon>
         <Link to={`/item/${item.id}`}>
