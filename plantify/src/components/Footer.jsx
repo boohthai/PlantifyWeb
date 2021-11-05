@@ -1,15 +1,8 @@
-import {
-  Facebook,
-  Instagram,
-  MailOutline,
-  Phone,
-  Pinterest,
-  Room,
-  Twitter,
-} from "@material-ui/icons";
+import { Facebook, Instagram, MailOutline, Phone, Pinterest, Room, Twitter } from "@material-ui/icons";
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import React from 'react';
+import React from "react";
+
 const Container = styled.div`
   display: flex;
   ${mobile({ flexDirection: "column" })}
@@ -71,7 +64,6 @@ const Right = styled.div`
   flex: 1;
   padding: 20px;
   ${mobile({ backgroundColor: "#fff8f8" })}
-
 `;
 
 const ContactItem = styled.div`
@@ -81,7 +73,7 @@ const ContactItem = styled.div`
 `;
 
 const Payment = styled.img`
-    width: 50%;
+  width: 50%;
 `;
 
 const Footer = () => {
@@ -89,9 +81,7 @@ const Footer = () => {
     <Container>
       <Left>
         <Logo>PLANTIFY.</Logo>
-        <Desc>
-        Find something memorable, join a community doing good.
-        </Desc>
+        <Desc>Find something memorable, join a community doing good.</Desc>
         <SocialContainer>
           <SocialIcon color="3B5999">
             <Facebook />
@@ -122,13 +112,13 @@ const Footer = () => {
       <Right>
         <Title>Contact</Title>
         <ContactItem>
-          <Room style={{marginRight:"10px"}}/> 268 Ly Thuong Kiet Str., Distric 10, HCMC
+          <Room style={{ marginRight: "10px" }} /> 268 Ly Thuong Kiet Str., Distric 10, HCMC
         </ContactItem>
         <ContactItem>
-          <Phone style={{marginRight:"10px"}}/> +1 234 56 78
+          <Phone style={{ marginRight: "10px" }} /> +1 234 56 78
         </ContactItem>
         <ContactItem>
-          <MailOutline style={{marginRight:"10px"}} /> contact@plantify.dev
+          <MailOutline style={{ marginRight: "10px" }} /> contact@plantify.dev
         </ContactItem>
         <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
       </Right>

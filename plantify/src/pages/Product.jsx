@@ -5,13 +5,16 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import { mobile } from "../responsive";
-import React from 'react';
+import React from "react";
+import { useParams } from "react-router-dom";
+import { popularProducts } from "../data";
+
 const Container = styled.div``;
 
 const Wrapper = styled.div`
   padding: 50px;
   display: flex;
-  ${mobile({ padding: "10px", flexDirection:"column" })}
+  ${mobile({ padding: "10px", flexDirection: "column" })}
 `;
 
 const ImgContainer = styled.div`
@@ -62,14 +65,14 @@ const FilterTitle = styled.span`
   font-weight: 200;
 `;
 
-const FilterColor = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
-  margin: 0px 5px;
-  cursor: pointer;
-`;
+// const FilterColor = styled.div`
+//   width: 20px;
+//   height: 20px;
+//   border-radius: 50%;
+//   background-color: ${(props) => props.color};
+//   margin: 0px 5px;
+//   cursor: pointer;
+// `;
 
 const FilterSize = styled.select`
   margin-left: 10px;
@@ -110,30 +113,32 @@ const Button = styled.button`
   cursor: pointer;
   font-weight: 500;
 
-  &:hover{
-      background-color: #f8f4f4;
+  &:hover {
+    background-color: #f8f4f4;
   }
 `;
 
 const Product = () => {
+  const handleAddToCart = () => {
+    console.log("ADDING TO CART");
+    return;
+  };
+
+  let { id } = useParams();
+  const item = popularProducts.filter((item) => item.id.toString() === id)[0];
+
   return (
     <Container>
       <Navbar />
       <Announcement />
       <Wrapper>
         <ImgContainer>
-          <Image src = "https://bloomscape.com/wp-content/uploads/2020/08/bloomscape_peperomia-watermelon_detail.jpg?ver=279042"/>
+          <Image src={item.img} />
         </ImgContainer>
         <InfoContainer>
-          <Title>Peperomia</Title>
-          <Desc>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-            venenatis, dolor in finibus malesuada, lectus ipsum porta nunc, at
-            iaculis arcu nisi sed mauris. Nulla fermentum vestibulum ex, eget
-            tristique tortor pretium ut. Curabitur elit justo, consequat id
-            condimentum ac, volutpat ornare.
-          </Desc>
-          <Price>40000 VND</Price>
+          <Title>{item.title}</Title>
+          <Desc>{item.description}</Desc>
+          <Price>{item.price} VND</Price>
           <FilterContainer>
             <Filter>
               <FilterTitle>Size</FilterTitle>
@@ -152,7 +157,7 @@ const Product = () => {
               <Amount>1</Amount>
               <Add />
             </AmountContainer>
-            <Button>ADD TO CART</Button>
+            <Button onClick={handleAddToCart}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>

@@ -3,6 +3,8 @@ import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   height: 60px;
@@ -67,6 +69,8 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
+  const totalCartItems = useSelector((state) => state.cart.total);
+
   return (
     <Container>
       <Wrapper>
@@ -78,14 +82,18 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>PLANTIFY.</Logo>
+          <Link to="/" style={{ textDecoration: "none", color: "gray" }}>
+            <Logo>PLANTIFY.</Logo>
+          </Link>
         </Center>
         <Right>
-          <MenuItem>REGISTER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
+          {/* <MenuItem>REGISTER</MenuItem>
+          <MenuItem>SIGN IN</MenuItem> */}
           <MenuItem>
-            <Badge badgeContent={4} color="primary">
-              <ShoppingCartOutlined />
+            <Badge badgeContent={totalCartItems} color="primary">
+              <Link style={{ textDecoration: "none", color: "gray" }} to="/cart">
+                <ShoppingCartOutlined />
+              </Link>
             </Badge>
           </MenuItem>
         </Right>

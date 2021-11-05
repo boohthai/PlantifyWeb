@@ -5,7 +5,8 @@ import Products from "../components/Products";
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import { mobile } from "../responsive";
-import React from 'react';
+import React from "react";
+
 const Container = styled.div``;
 
 const Title = styled.h1`
@@ -66,7 +67,7 @@ const ProductList = () => {
         <Filter>
           <FilterText>Sort Products:</FilterText>
           <Select>
-            <Option selected>Newest</Option>
+            <Option defaultValue>Newest</Option>
             <Option>Price (asc)</Option>
             <Option>Price (desc)</Option>
           </Select>
