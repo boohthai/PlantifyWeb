@@ -13,7 +13,11 @@ const Container = styled.div`
 `;
 
 const Announcement = () => {
-  return <Container>Super Deal! Free Shipping on Orders Over $50</Container>;
+  return (
+    <Container>
+      Super Deal! 5% Discount (Maximum of 50.000VND) for all orders and Free Shipping on Orders Over 500.000VND
+    </Container>
+  );
 };
 
 export default Announcement;

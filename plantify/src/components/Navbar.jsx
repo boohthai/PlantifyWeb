@@ -1,5 +1,5 @@
 import { Badge } from "@material-ui/core";
-import { Search, ShoppingCartOutlined } from "@material-ui/icons";
+import { Search, ShoppingCartOutlined, LocalFlorist } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
@@ -83,7 +83,11 @@ const Navbar = () => {
         </Left>
         <Center>
           <Link to="/" style={{ textDecoration: "none", color: "gray" }}>
-            <Logo>PLANTIFY.</Logo>
+            <Logo>
+              <LocalFlorist />
+              <span> PLANTIFY </span>
+              <LocalFlorist />
+            </Logo>
           </Link>
         </Center>
         <Right>

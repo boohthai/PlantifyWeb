@@ -172,6 +172,18 @@ const Cart = () => {
     dispatch(removeItemFromCart(item));
   };
 
+  const calcTotal = (total) => {
+    var result = total;
+    if (total > 0) {
+      result += 30000;
+    }
+    if (total >= 500000) {
+      result -= 30000;
+    }
+    const promotion = total * 0.05 >= 50000 ? 50000 : total * 0.05;
+    return result - promotion;
+  };
+
   useEffect(() => {
     setTotalCost(cost);
   }, [cost]);
@@ -246,15 +258,21 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>30000 VND</SummaryItemPrice>
+              <SummaryItemPrice>{totalCost > 0 ? 30000 : 0} VND</SummaryItemPrice>
             </SummaryItem>
+            {totalCost >= 500000 && (
+              <SummaryItem style={{ color: "red" }}>
+                <SummaryItemText>Freeship for Order Over 500.000VND</SummaryItemText>
+                <SummaryItemPrice>-30000 VND</SummaryItemPrice>
+              </SummaryItem>
+            )}
             <SummaryItem>
-              <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice> -5900 VND </SummaryItemPrice>
+              <SummaryItemText>5% Discount (No More than 50.000)</SummaryItemText>
+              <SummaryItemPrice> -{totalCost * 0.05 >= 50000 ? 50000 : totalCost * 0.05} VND </SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice> {totalCost - 24100 > 0 ? totalCost - 24100 : 0} VND </SummaryItemPrice>
+              <SummaryItemPrice> {calcTotal(totalCost)} VND </SummaryItemPrice>
             </SummaryItem>
             <Button>CHECKOUT NOW</Button>
           </Summary>
