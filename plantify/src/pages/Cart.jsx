@@ -254,7 +254,7 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice> {totalCost - 24100} VND </SummaryItemPrice>
+              <SummaryItemPrice> {totalCost - 24100 > 0 ? totalCost - 24100 : 0} VND </SummaryItemPrice>
             </SummaryItem>
             <Button>CHECKOUT NOW</Button>
           </Summary>

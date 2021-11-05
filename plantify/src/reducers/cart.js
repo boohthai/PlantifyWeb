@@ -41,6 +41,7 @@ const cartReducer = (state = initialState, action) => {
         newList.push(action.payload);
       }
       state.total += action.payload.quantity;
+      state.cost += action.payload.quantity * action.payload.price;
       return {
         ...state,
         list: newList,
@@ -52,6 +53,7 @@ const cartReducer = (state = initialState, action) => {
       let { id } = action.payload;
       newList = newList.filter((item) => item.id !== id);
       state.total -= action.payload.quantity;
+      state.cost -= action.payload.quantity * action.payload.price;
       return {
         ...state,
         list: newList,
