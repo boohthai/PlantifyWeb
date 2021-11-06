@@ -49,7 +49,7 @@ const cartReducer = (state = initialState, action) => {
     }
 
     case "REMOVE_ITEM": {
-      var newList = [...state.list];
+      let newList = [...state.list];
       let { id } = action.payload;
       newList = newList.filter((item) => item.id !== id);
       state.total -= action.payload.quantity;
@@ -62,8 +62,8 @@ const cartReducer = (state = initialState, action) => {
 
     case "UPDATE_QUANTITY": {
       const { item, amount } = action.payload;
-      var newList = [...state.list];
-      var newCost;
+      let newList = [...state.list];
+      let newCost;
       newList.forEach((i) => {
         if (i.id === item.id) {
           i.quantity += amount;

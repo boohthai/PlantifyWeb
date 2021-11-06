@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import ProductList from "./pages/ProductList";
 import Cart from "./pages/Cart";
 import React from "react";
-import Checkoutform from "./pages/Checkoutform"
+import Checkoutform from "./pages/Checkoutform";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
@@ -18,8 +18,11 @@ const App = () => {
             <Cart />
           </Route>
           <Route path="/item/:id" children={<Product />} />
+          <Route path="/checkout">
+            <Checkoutform />
+          </Route>
           <Route path="/">
-            <Checkoutform/>
+            <Home />
           </Route>
         </Switch>
       </div>

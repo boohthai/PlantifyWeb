@@ -157,6 +157,8 @@ const Button = styled.button`
   background-color: black;
   color: white;
   font-weight: 600;
+  cursor: pointer;
+  border-radius: 10px;
 `;
 
 const Cart = () => {
@@ -164,7 +166,6 @@ const Cart = () => {
   const cost = useSelector((state) => state.cart.cost);
   const totalItems = useSelector((state) => state.cart.total);
   const [totalCost, setTotalCost] = useState(cost);
-  console.log("Cart: ", cartItems);
   const dispatch = useDispatch();
 
   const handleRemoveItem = (item) => {
@@ -202,7 +203,9 @@ const Cart = () => {
             <TopText>Shopping Bag ({totalItems})</TopText>
             <TopText>Your Wishlist (0)</TopText>
           </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
+          <Link to="/checkout">
+            <TopButton type="filled">CHECKOUT NOW</TopButton>
+          </Link>
         </Top>
         <Bottom>
           <Info>
@@ -274,7 +277,9 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice> {calcTotal(totalCost)} VND </SummaryItemPrice>
             </SummaryItem>
-            <Button>CHECKOUT NOW</Button>
+            <Link to="/checkout">
+              <Button>CHECKOUT NOW</Button>
+            </Link>
           </Summary>
         </Bottom>
       </Wrapper>
