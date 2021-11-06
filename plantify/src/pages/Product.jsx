@@ -38,15 +38,18 @@ const InfoContainer = styled.div`
 `;
 
 const Title = styled.h1`
-  font-weight: 200;
+  font-size: 50px;
+  font-weight: 600;
 `;
 
 const Desc = styled.p`
+  font-size: 20px;
+  color: gray;
   margin: 20px 0px;
 `;
 
 const Price = styled.span`
-  font-weight: 100;
+  font-weight: 300;
   font-size: 40px;
 `;
 
@@ -78,6 +81,8 @@ const FilterTitle = styled.span`
 // `;
 
 const FilterSize = styled.select`
+  width: 100px;
+  border-radius: 10px;
   margin-left: 10px;
   padding: 5px;
 `;
@@ -115,6 +120,8 @@ const Button = styled.button`
   background-color: white;
   cursor: pointer;
   font-weight: 500;
+  border-radius: 15px;
+  font-weight: 700;
 
   &:hover {
     background-color: #f8f4f4;
@@ -149,7 +156,9 @@ const Product = () => {
         <InfoContainer>
           <Title>{item.title}</Title>
           <Desc>{item.description}</Desc>
-          <Price>{item.price} VND</Price>
+          <Price>
+            <span style={{ fontWeight: "500" }}>{item.price}</span> VND
+          </Price>
           <FilterContainer>
             <Filter>
               <FilterTitle>Size</FilterTitle>
