@@ -3,7 +3,6 @@ import { mobile } from "../responsive";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { CallReceived } from "@material-ui/icons";
 
 const Container = styled.div`
   width: 100%;
@@ -172,7 +171,11 @@ const Checkoutform = () => {
           By pressing ORDER means you agree with our <b>PRIVACY POLICY</b>
         </Agreement>
         <Buttons>
-          <Button>ORDER</Button>
+          <Button>
+            <Link style={{ textDecoration: "none", color: "white", fontSize: "22px" }} to="/purchased">
+              ORDER
+            </Link>
+          </Button>
           <Button>
             <Link style={{ textDecoration: "none", color: "white", fontSize: "22px" }} to="/">
               Go to HOME

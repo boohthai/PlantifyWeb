@@ -20,6 +20,9 @@ const App = () => {
           </Route>
           <Route path="/item/:id" children={<Product />} />
           <Route path="/checkout">
+            <Checkoutform />
+          </Route>
+          <Route path="/purchased">
             <Finalpage />
           </Route>
           <Route path="/">
