@@ -5,6 +5,7 @@ import Cart from "./pages/Cart";
 import React from "react";
 import Checkoutform from "./pages/Checkoutform";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Finalpage from "./pages/Finalpage";
 
 const App = () => {
   return (
@@ -19,7 +20,7 @@ const App = () => {
           </Route>
           <Route path="/item/:id" children={<Product />} />
           <Route path="/checkout">
-            <Checkoutform />
+            <Finalpage />
           </Route>
           <Route path="/">
             <Home />

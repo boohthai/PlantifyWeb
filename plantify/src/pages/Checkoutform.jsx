@@ -120,7 +120,7 @@ const Checkoutform = () => {
   return (
     <Container>
       <Wrapper>
-        <Title>CONFIRMATION YOUR ORDER</Title>
+        <Title>CONFIRM YOUR ORDER</Title>
         <Form>
           <Input placeholder="Full Name" />
           <Input placeholder="Email" />
